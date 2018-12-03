@@ -7,7 +7,7 @@ from shop.modifiers.base import ShippingModifier
 from shop.money import Money
 from shop.shipping.defaults import DefaultShippingProvider
 from shop.payment.defaults import ForwardFundPayment
-from myshop.payment import CodPayment
+# from myshop.payment import CodPayment
 
 from shop.modifiers.base import PaymentModifier
 
