@@ -1,0 +1,39 @@
+{% extends "shop/catalog/product-add2cart.html" %}
+{% load i18n %}
+
+{% block add-product-to-cart-table %}
+<table shop-add-to-cart="{{ product.get_absolute_url }}/add-lamellafix-to-cart" class="table">
+	<thead>
+		<tr>
+			<th>{% trans "Quantity" %}</th>
+			<th>{% trans "Unit Price" %}</th>
+			<th>{% trans "Subtotal" %}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<input type="number" min="1" class="form-control" ng-model="context.quantity"  ng-change="updateContext()" />
+
+			</td>
+			<td ng-bind="context.unit_price"></td>
+			<td ng-bind="context.rebate"></td>
+			<td ng-bind="context.subtotal"></td>
+		</tr>
+		{% if request.session.is_empty %}
+		<tr>
+			<td colspan="4">{% block cookie-disclaimer %}{{ block.super }}{% endblock %}</td>
+		</tr>
+		{% endif %}
+		<tr>
+			<td colspan="2">
+				<button class="btn btn-info btn-xs" ng-disabled="!context.quantity" ng-click="addToCart('{% url 'shop:watch-list' %}', {watch: true})">{% trans "Watch product" %}</button>
+
+			</td>
+			<td colspan="2">
+				<button class="btn btn-primary btn-block" ng-disabled="!context.quantity" ng-click="addToCart('{% url 'shop:cart-list' %}')">{% trans "Add to cart" %}</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+{% endblock add-product-to-cart-table %}

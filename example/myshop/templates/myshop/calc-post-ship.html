@@ -1,0 +1,9 @@
+{#this page insert do Dostavka i oplat #}
+<h1>Hello
+	{% if request.user.is_authenticated %}
+		{{ request.user.first_name }} {{ request.user.last_name}}
+	{% else %}
+		Guest
+	{% endif %}
+</h1>
+

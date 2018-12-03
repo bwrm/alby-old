@@ -1,0 +1,88 @@
+{% extends "myshop/catalog/product-detail.html" %}
+{% load i18n static cms_tags sekizai_tags sass_tags %}
+
+{% block main-content %}
+
+{% addtoblock "css" %}<link href="{% sass_src 'node_modules/angular-bootstrap-plus/src/scrollpanel/scrollpanel.scss' %}" rel="stylesheet" type="text/css" />{% endaddtoblock %}
+{% addtoblock "js" %}<script src="{% static 'node_modules/angular-bootstrap-plus/src/scrollpanel/scrollpanel.js' %}" type="text/javascript"></script>{% endaddtoblock %}
+{% add_data "ng-requires" "bs-plus.scrollpanel" %}
+
+<div class="container">
+	<div class="row product-detail">
+		<div class="col-xs-12 col-md-5">
+			<bsp-scrollpanel>
+				<ul>{% for img in product.images.all %}
+					<li><img src="{{ img.url }}" alt="{{ product.product_name }}" /></li>
+				{% endfor %}</ul>
+			</bsp-scrollpanel>
+		</div>
+		<div class="col-xs-12 col-md-7">
+			<h3>{% render_model product "product_name" %}</h3>
+			<table class="table table-bordered">
+				<tbody class="table-striped">
+					<tr>
+						<td>{% trans "Length" %}</td>
+						<td>{{ product.length }} {% trans "mm" %}</td>
+					</tr>
+					<tr>
+						<td>{% trans "Width" %}</td>
+						<td>{{ product.lamella_width }} {% trans "mm" %}</td>
+					</tr>
+					{% if product.depth %}
+						<tr>
+							<td>{% trans "Depth" %}</td>
+							<td>{{ product.depth }} {% trans "mm" %}</td>
+						</tr>
+					{% endif %}
+					{% if product.weight %}
+						<tr>
+							<td>{% trans "Weight per unit" %}</td>
+							<td>{{ product.weight}} {% trans "kg" %}</td>
+						</tr>
+					{% endif %}
+				</tbody>
+			</table>
+		<h2>{{ product.unit_price }}*</h2>
+		<h6>{% trans "* Price depends on order quantity. For get price enter quantity below" %}</h6>
+			<!-- include "Add to Cart" dialog box -->
+			{% include "myshop/catalog/lamellafix-add2cart.html" %}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-12">
+			<div class="tabbable tabs-below" ng-init="selectedTab = 1;">
+				<ul class="nav nav-tabs nav-justified">
+					<li ng-class="{active: selectedTab == 1}">
+						<a href="#" ng-click="selectedTab = 1;">{% trans "Информация о товаре" %}</a>
+					</li>
+					<li ng-class="{active: selectedTab == 2}">
+						<a href="#" ng-click="selectedTab = 2;">{% trans "Технические характеристики" %}</a>
+					</li>
+				</ul>
+
+				<div class="tab-content" ng-show="selectedTab == 1">
+					<div style="padding: 20px 0 20px 0;">
+						{{ product.caption|safe }}
+					</div>
+				</div>
+				<div class="tab-content" ng-show="selectedTab == 2">
+					<div style="padding: 20px 0 20px 0;">
+						{{ product.description|safe }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<script id="scrollpanel/bsp-scrollpanel.tmpl.html" type="text/ng-template">
+	<panel-control class="left ">
+		<span class="glyphicon glyphicon-chevron-left"></span>
+	</panel-control>
+	<ng-transclude></ng-transclude>
+	<panel-control class="right">
+		<span class="glyphicon glyphicon-chevron-right"></span>
+	</panel-control>
+</script>
+
+{% endblock main-content %}

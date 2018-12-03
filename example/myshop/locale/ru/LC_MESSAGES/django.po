@@ -1,0 +1,509 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-01 15:42+0300\n"
+"PO-Revision-Date: 2018-12-01 15:43+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: myshop/admin/polymorphic_.py:83 myshop/admin/polymorphicx_.py:74
+msgid "Text Index"
+msgstr ""
+
+#: myshop/admin/polymorphic_.py:99 myshop/admin/polymorphicx_.py:90
+msgid "Price starting at"
+msgstr "Цена от"
+
+#: myshop/apps.py:13
+msgid "My Shop"
+msgstr "Магазин"
+
+#: myshop/management/commands/initialize_shop_demo.py:23
+msgid "Initialize the workdir to run the demo of myshop."
+msgstr "Инициализация рабочей дериктории для запуска демо версии"
+
+#: myshop/models/discount.py:7
+msgid "Discount name"
+msgstr "Группа скидок"
+
+#: myshop/models/discount.py:8
+msgid "Discount schema"
+msgstr "Схема скидок"
+
+#: myshop/models/discount.py:8
+msgid ""
+"Type discont scheme: first- quantity? second- rebate in %. Example: 10:25 - "
+"10 -quantity 25%"
+msgstr ""
+"Введите схему применения скидок: первая цифра - количество с которого "
+"начинается скидка, вторая - скидка в %. Например: 10:25 - при заказе от 10 "
+"шт, скидка составляет 25%"
+
+#: myshop/models/manufacturer.py:11 myshop/models/polymorphic_/smartphone.py:21
+msgid "Name"
+msgstr "Название"
+
+#: myshop/models/polymorphic_/commodity.py:19
+#: myshop/models/polymorphic_/lamella.py:16
+#: myshop/models/polymorphic_/smartcard.py:17
+#: myshop/models/polymorphic_/smartphone.py:173
+msgid "Unit price"
+msgstr "Цена за ед."
+
+#: myshop/models/polymorphic_/commodity.py:21
+#: myshop/models/polymorphic_/smartcard.py:19
+#: myshop/models/polymorphic_/smartphone.py:175
+msgid "Net price for this product"
+msgstr "Цена за этот продукт"
+
+#: myshop/models/polymorphic_/commodity.py:25
+#: myshop/models/polymorphic_/lamella.py:63
+#: myshop/models/polymorphic_/smartcard.py:39
+#: myshop/models/polymorphic_/smartphone.py:167
+msgid "Product code"
+msgstr "Артикул"
+
+#: myshop/models/polymorphic_/commodity.py:32
+#: myshop/models/polymorphic_/smartcard.py:46
+#: myshop/models/polymorphic_/smartphone.py:113
+#: myshop/templates/myshop/catalog/smartcard-detail.html:29
+#: myshop/templates/myshop/catalog/smartphonemodel-detail.html:25
+msgid "Manufacturer"
+msgstr "Производитель"
+
+#: myshop/models/polymorphic_/commodity.py:38
+msgid "Commodity"
+msgstr "Товар"
+
+#: myshop/models/polymorphic_/commodity.py:39
+msgid "Commodities"
+msgstr "Товары"
+
+#: myshop/models/polymorphic_/lamella.py:18
+msgid " per unit"
+msgstr "за ед."
+
+#: myshop/models/polymorphic_/lamella.py:23
+msgid "width"
+msgstr "ширина"
+
+#: myshop/models/polymorphic_/lamella.py:27
+msgid "Lammelas width"
+msgstr "Ширина ламели"
+
+#: myshop/models/polymorphic_/lamella.py:31
+msgid "Lamella's length"
+msgstr "Длина ламели"
+
+#: myshop/models/polymorphic_/lamella.py:37
+msgid "Lamella's depth"
+msgstr "Толщина ламели"
+
+#: myshop/models/polymorphic_/lamella.py:43
+msgid "weight"
+msgstr "вес"
+
+#: myshop/models/polymorphic_/lamella.py:46
+msgid "Weight of item, kg"
+msgstr "Вес единицы"
+
+#: myshop/models/polymorphic_/lamella.py:49
+#: myshop/models/polymorphic_/lamella.py:77
+msgid "Lamella"
+msgstr "Ламель"
+
+#: myshop/models/polymorphic_/lamella.py:51
+msgid "Is this lamella (for calculating weight)."
+msgstr "Отметить как ламель (для автоматического вычисления веса)"
+
+#: myshop/models/polymorphic_/lamella.py:55
+msgid "Enter weight by hand"
+msgstr "Ввести вес вручную"
+
+#: myshop/models/polymorphic_/lamella.py:57
+msgid "For enter lamella weight by hand"
+msgstr "Для ввода веса товара вручную"
+
+#: myshop/models/polymorphic_/lamella.py:69
+#: myshop/models/polymorphic_/smartcard.py:54
+#: myshop/models/polymorphic_/smartphone.py:117
+msgid "Description"
+msgstr "Описание"
+
+#: myshop/models/polymorphic_/lamella.py:71
+#: myshop/models/polymorphic_/smartcard.py:56
+msgid "Full description used in the catalog's detail view of Smart Cards."
+msgstr ""
+
+#: myshop/models/polymorphic_/lamella.py:78
+msgid "Lamellas"
+msgstr "Ламели"
+
+#: myshop/models/polymorphic_/order.py:17
+msgid "Ordered quantity"
+msgstr "Заказанное количество"
+
+#: myshop/models/polymorphic_/order.py:18
+msgid "Item canceled "
+msgstr "Отменен"
+
+#: myshop/models/polymorphic_/product.py:22
+msgid "Product Name"
+msgstr "Название товара"
+
+#: myshop/models/polymorphic_/product.py:27
+msgid "Slug"
+msgstr "Путь"
+
+#: myshop/models/polymorphic_/product.py:32
+msgid "Caption"
+msgstr "Краткое описание"
+
+#: myshop/models/polymorphic_/product.py:36
+msgid "Short description used in the catalog's list view of products."
+msgstr "Короткое описание товара для каталога"
+
+#: myshop/models/polymorphic_/product.py:39
+msgid "Sort by"
+msgstr "Сортировать по"
+
+#: myshop/models/polymorphic_/product.py:45
+msgid "Choose list view this product shall appear on."
+msgstr ""
+
+#: myshop/models/polymorphic_/product.py:56
+msgid "Product"
+msgstr "Товар"
+
+#: myshop/models/polymorphic_/product.py:57
+msgid "Products"
+msgstr "Товары"
+
+#: myshop/models/polymorphic_/smartcard.py:26
+#: myshop/templates/myshop/catalog/smartcard-detail.html:21
+msgid "Card Type"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartcard.py:33
+msgid "Transfer Speed"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartcard.py:49
+msgid "Storage Capacity"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartcard.py:50
+msgid "Storage capacity in GB"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartcard.py:62
+msgid "Smart Card"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartcard.py:63
+msgid "Smart Cards"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartphone.py:46
+msgid "Battery type"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartphone.py:51
+msgid "Capacity"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartphone.py:52
+msgid "Battery capacity in mAh"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartphone.py:56
+msgid "RAM"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartphone.py:57
+msgid "RAM storage in MB"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartphone.py:61
+msgid "WiFi"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartphone.py:63
+#: myshop/templates/myshop/catalog/smartphonemodel-detail.html:37
+msgid "WiFi Connectivity"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartphone.py:67
+msgid "Bluetooth"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartphone.py:69
+#: myshop/templates/myshop/catalog/smartphonemodel-detail.html:41
+msgid "Bluetooth Connectivity"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartphone.py:73
+#: myshop/templates/myshop/catalog/smartphonemodel-detail.html:45
+msgid "GPS"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartphone.py:75
+msgid "GPS integrated"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartphone.py:80
+msgid "Operating System"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartphone.py:84
+#: myshop/templates/myshop/catalog/lamellafix-detail.html:28
+msgid "Width"
+msgstr "Ширина"
+
+#: myshop/models/polymorphic_/smartphone.py:87
+msgid "Width in mm"
+msgstr "Ширина в мм"
+
+#: myshop/models/polymorphic_/smartphone.py:91
+msgid "Height"
+msgstr "Высота"
+
+#: myshop/models/polymorphic_/smartphone.py:94
+msgid "Height in mm"
+msgstr "Высота в мм"
+
+#: myshop/models/polymorphic_/smartphone.py:98
+#: myshop/templates/myshop/catalog/smartphonemodel-detail.html:53
+msgid "Weight"
+msgstr "Вес единицы"
+
+#: myshop/models/polymorphic_/smartphone.py:101
+msgid "Weight in gram"
+msgstr "Вес в гр."
+
+#: myshop/models/polymorphic_/smartphone.py:105
+#: myshop/templates/myshop/catalog/smartphonemodel-detail.html:57
+msgid "Screen size"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartphone.py:108
+msgid "Diagonal screen size in inch"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartphone.py:119
+msgid "Full description used in the catalog's detail view of Smart Phones."
+msgstr ""
+
+#: myshop/models/polymorphic_/smartphone.py:125
+msgid "Smart Phone"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartphone.py:126
+msgid "Smart Phones"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartphone.py:162
+msgid "Smartphone Model"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartphone.py:179
+#: myshop/templates/myshop/catalog/smartphone-add2cart.html:8
+msgid "Internal Storage"
+msgstr ""
+
+#: myshop/models/polymorphic_/smartphone.py:180
+msgid "Internal storage in MB"
+msgstr ""
+
+#: myshop/modifiers.py:21
+msgid "Postal shipping"
+msgstr "Доставка почтой"
+
+#: myshop/modifiers.py:40
+msgid "Shipping costs"
+msgstr "Стоимость доставки"
+
+#: myshop/modifiers.py:49
+msgid "Customer pickups the goods"
+msgstr "Самовывоз"
+
+#: myshop/modifiers.py:56
+msgid "Courier delivery. Onliy within Minsk"
+msgstr "Доставка курьером. (Только в пределах г. Минска)"
+
+#: myshop/modifiers.py:63
+msgid "Courier shipping costs"
+msgstr "Стоимость доставки курьером"
+
+#: myshop/modifiers.py:78
+msgid "Cash on Post"
+msgstr "Наложенный платеж"
+
+#: myshop/modifiers.py:85 myshop/modifiers.py:107
+msgid "+ {}% handling fee"
+msgstr "+ {}% комисия"
+
+#: myshop/modifiers.py:100
+msgid "Cash on Delivery"
+msgstr "Оплата при получении"
+
+#: myshop/settings.py:446
+msgid "Default Page"
+msgstr "Страница по умолчанию"
+
+#: myshop/settings.py:447
+msgid "Static Page"
+msgstr "Статическая страница"
+
+#: myshop/settings.py:524
+msgid "Product Heading"
+msgstr "Название товара"
+
+#: myshop/settings.py:525
+msgid "Manufacturer Filter"
+msgstr "Фильтр производителей"
+
+#: myshop/settings.py:529
+msgid "Default"
+msgstr "По умолчанию"
+
+#: myshop/settings.py:530
+msgid "Add Commodity to Cart"
+msgstr "Добавить в корзину"
+
+#: myshop/settings.py:670
+msgid "Thanks for purchasing at MyShop"
+msgstr "Спасибо за покупку"
+
+#: myshop/templates/myshop/cart/editable.html:9
+#: myshop/templates/myshop/cart/static.html:11
+#: myshop/templates/myshop/order/detail.html:10
+msgid "Product Code"
+msgstr "Артикул"
+
+#: myshop/templates/myshop/cart/editable.html:25
+msgid "Remove"
+msgstr "Удалить"
+
+#: myshop/templates/myshop/cart/editable.html:29
+msgid "Watch Item"
+msgstr "В список"
+
+#: myshop/templates/myshop/catalog/commodity-add2cart.html:8
+#: myshop/templates/myshop/catalog/lamellafix-add2cart.html:9
+#: myshop/templates/myshop/catalog/smartphone-add2cart.html:10
+msgid "Unit Price"
+msgstr "Цена за ед."
+
+#: myshop/templates/myshop/catalog/commodity-add2cart.html:9
+#: myshop/templates/myshop/catalog/lamellafix-add2cart.html:10
+#: myshop/templates/myshop/catalog/smartphone-add2cart.html:11
+msgid "Subtotal"
+msgstr "Стоимость корзины"
+
+#: myshop/templates/myshop/catalog/commodity-add2cart.html:20
+#: myshop/templates/myshop/catalog/lamellafix-add2cart.html:30
+#: myshop/templates/myshop/catalog/smartphone-add2cart.html:40
+msgid "Watch product"
+msgstr "В список"
+
+#: myshop/templates/myshop/catalog/commodity-add2cart.html:24
+#: myshop/templates/myshop/catalog/lamellafix-add2cart.html:34
+#: myshop/templates/myshop/catalog/smartphone-add2cart.html:43
+msgid "Add to cart"
+msgstr "Добавить в корзину"
+
+#: myshop/templates/myshop/catalog/lamellafix-add2cart.html:8
+#: myshop/templates/myshop/catalog/smartphone-add2cart.html:9
+msgid "Quantity"
+msgstr "Количество"
+
+#: myshop/templates/myshop/catalog/lamellafix-detail.html:24
+msgid "Length"
+msgstr "Длина"
+
+#: myshop/templates/myshop/catalog/lamellafix-detail.html:25
+#: myshop/templates/myshop/catalog/lamellafix-detail.html:29
+#: myshop/templates/myshop/catalog/lamellafix-detail.html:34
+msgid "mm"
+msgstr "мм"
+
+#: myshop/templates/myshop/catalog/lamellafix-detail.html:33
+msgid "Depth"
+msgstr "Толщина"
+
+#: myshop/templates/myshop/catalog/lamellafix-detail.html:39
+msgid "Weight per unit"
+msgstr "Вес одной шт."
+
+#: myshop/templates/myshop/catalog/lamellafix-detail.html:40
+msgid "kg"
+msgstr "кг"
+
+#: myshop/templates/myshop/catalog/lamellafix-detail.html:46
+msgid "* Price depends on order quantity. For get price enter quantity below"
+msgstr ""
+"*Цена зависит от заказанного количества. Введите необходимое количество в "
+"форму ниже."
+
+#: myshop/templates/myshop/catalog/lamellafix-detail.html:56
+msgid "Информация о товаре"
+msgstr ""
+
+#: myshop/templates/myshop/catalog/lamellafix-detail.html:59
+msgid "Технические характеристики"
+msgstr ""
+
+#: myshop/templates/myshop/catalog/smartcard-detail.html:25
+msgid "Storage capacity"
+msgstr ""
+
+#: myshop/templates/myshop/catalog/smartphone-add2cart.html:20
+msgid "Pluggable"
+msgstr ""
+
+#: myshop/templates/myshop/catalog/smartphonemodel-detail.html:29
+msgid "Battery"
+msgstr ""
+
+#: myshop/templates/myshop/catalog/smartphonemodel-detail.html:33
+msgid "RAM Storage"
+msgstr ""
+
+#: myshop/templates/myshop/catalog/smartphonemodel-detail.html:49
+msgid "Dimensions"
+msgstr "Размеры"
+
+#: myshop/templates/myshop/catalog/smartphonemodel-detail.html:58
+msgid "inch"
+msgstr "дюйм"
+
+#: myshop/templates/myshop/checkout/shipping-address-form.html:31
+msgid "Choose a previously used shipping address"
+msgstr "Выберите ранее используемый адрес доставки"
+
+#: myshop/templates/myshop/checkout/shipping-address-form.html:36
+msgid "Add a new shipping address"
+msgstr "Добавить новый адрес доставки"
+
+#: myshop/templates/myshop/checkout/shipping-address-form.html:46
+msgid "Remove this address"
+msgstr "Удалить этот адрес"
+
+#: myshop/templates/myshop/pages/password-reset-confirm.html:4
+msgid "Password Reset Confirm"
+msgstr "Подтверждение сброса пароля"

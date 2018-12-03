@@ -1,0 +1,12 @@
+{% extends 'myshop/catalog/filter.html' %}
+{% load shop_tags %}
+
+{% block filter_content %}
+    {% get_filter_fields filter.filter_set.form 'manufacturer' as data %}
+
+    <form shop-product-filter="{{ data.fields_str }}">
+        {% for field in data.fields %}
+            <p>{{ field.label }} {{ field }}</p>
+        {% endfor %}
+    </form>
+{% endblock %}
