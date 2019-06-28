@@ -29,4 +29,5 @@ module.directive('shopMethodForm', ['$timeout', function($timeout) {
 }]);
 
 
+
 })(window.angular);

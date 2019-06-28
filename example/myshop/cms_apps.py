@@ -7,8 +7,17 @@ from cms.apphook_pool import apphook_pool
 from cms.cms_menus import SoftRootCutter
 from menus.menu_pool import menu_pool
 
+
 from shop.cms_apphooks import CatalogListCMSApp, CatalogSearchCMSApp, OrderCMSApp
 from django.utils.translation import ugettext_lazy as _
+
+
+class FabricListApp(CatalogListCMSApp):
+    name = _("Fabric List")
+    def get_urls(self, page=None, language=None, **kwargs):
+        return ['myshop.urls.custom_products']
+
+apphook_pool.register(FabricListApp)
 
 
 class CatalogListApp(CatalogListCMSApp):
@@ -16,7 +25,6 @@ class CatalogListApp(CatalogListCMSApp):
         return ['myshop.urls.polymorphic_products']
 
 apphook_pool.register(CatalogListApp)
-
 
 class CatalogSearchApp(CatalogSearchCMSApp):
     def get_urls(self, page=None, language=None, **kwargs):

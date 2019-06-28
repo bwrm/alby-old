@@ -15,6 +15,7 @@ from .polymorphic_.order import OrderItem
 from .polymorphic_.product import Product
 from .polymorphic_.commodity import Commodity
 from .polymorphic_.smartcard import SmartCard
+from .polymorphic_.fabric import Fabric
 from .polymorphic_.lamella import LamellaFix
 from .polymorphic_.smartphone import SmartPhoneModel, SmartPhoneVariant
 

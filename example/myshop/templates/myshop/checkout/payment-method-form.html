@@ -1,0 +1,82 @@
+ {% extends "shop/checkout/dialog-base.html" %}
+{% load i18n static sass_tags sekizai_tags %}
+
+{% block extra-styles %}
+	{{ block.super }}
+	{% addtoblock "css" %}<link href="{% sass_src 'shop/css/method-form.scss' %}" rel="stylesheet" type="text/css" />{% endaddtoblock %}
+{% endblock %}
+
+{% block extra-scripts %}
+	{{ block.super }}
+	{% addtoblock "js" %}<script src="{% static 'shop/js/method-form.js' %}" type="text/javascript"></script>{% endaddtoblock %}
+	{% add_data "ng-requires" "django.shop.method-form" %}
+{% endblock %}
+{% block dialog_form %}
+
+
+{#TODO: hide payment method when cart amount is zero#}
+
+<form shop-method-form djng-endpoint="{% url 'shop:checkout-upload' %}" name="{{ payment_method_form.form_name }}" novalidate>
+{% if payment_method_form.has_choices %}
+	<!--start-->
+{#{{ payment_method_form.as_div }}#}
+	<div class="djng-line-spreader"><ul ng-show="payment_method_form.$pristine" class="djng-form-errors ng-hide" style=""><li ng-show="payment_method_form.$error.rejected &amp;&amp; payment_method_form.$message" class="invalid ng-binding ng-hide" ng-bind="payment_method_form.$message"></li></ul></div>
+	<div class="form-group djng-field-required has-feedback">
+		<label class="control-label djng-field-required" for="paymentmethod_payment_modifier">Метод оплаты</label>
+		<div id="paymentmethod_payment_modifier">
+			<div class="radio" ng-show="shipping_method.shipping_modifier==='postal-shipping' || shipping_method.shipping_modifier==='postal-shipping-premium'" ng-cloak>
+			<label for="paymentmethod_payment_modifier_0">
+				<input name="payment_modifier" type="radio" value="cash-on-post" ng-change="updateMethod()" ng-model="payment_method['payment_modifier']" id="paymentmethod_payment_modifier_0" ng-required="!payment_method['payment_modifier']" class="ng-valid ng-not-empty ng-valid-required ng-dirty ng-valid-parse ng-touched" style="">
+				{% trans "Cash on Post" %}</label>
+			</div>
+			<div class="radio" ng-show="shipping_method.shipping_modifier!=='postal-shipping' && shipping_method.shipping_modifier!=='postal-shipping-premium'" ng-cloak>
+				<label for="paymentmethod_payment_modifier_1">
+					<input name="payment_modifier" type="radio" value="cash-on-delivery" ng-change="updateMethod()" ng-required="!payment_method['payment_modifier']" ng-model="payment_method['payment_modifier']" id="paymentmethod_payment_modifier_1" class="ng-valid ng-not-empty ng-valid-required ng-dirty ng-touched" style="">
+					{% trans "Cash on Delivery" %}</label>
+			</div>
+		</div>
+		<ul ng-show="payment_method_form['payment_modifier'].$dirty &amp;&amp; !payment_method_form['payment_modifier'].$untouched" class="djng-form-control-feedback djng-field-errors" style="">
+			<li ng-show="payment_method_form['payment_modifier'].$error.multifield" class="invalid ng-hide">At least one checkbox has to be selected.</li><li ng-show="payment_method_form['payment_modifier'].$valid" class="valid">
+
+		</li></ul>
+		<ul ng-show="payment_method_form['payment_modifier'].$pristine" class="djng-form-control-feedback djng-field-errors ng-hide" style="">
+			<li ng-show="payment_method_form['payment_modifier'].$valid" class="valid"></li>
+			<li ng-show="payment_method_form['payment_modifier'].$error.rejected &amp;&amp; payment_method_form['payment_modifier'].$message" class="invalid ng-binding ng-hide" ng-bind="payment_method_form['payment_modifier'].$message">
+
+			</li></ul>
+		<input type="hidden" name="plugin_id" value="15195" class="form-control ng-untouched ng-valid ng-not-empty ng-valid-parse ng-pristine" ng-model="payment_method['plugin_id']" id="paymentmethod_plugin_id" autocomplete="off">
+		<input type="hidden" name="plugin_order" value="4" class="form-control ng-untouched ng-valid ng-not-empty ng-valid-parse ng-pristine" ng-model="payment_method['plugin_order']" id="paymentmethod_plugin_order" autocomplete="off">
+	</div>
+	<!--stop-->
+
+{#TODO: make normal display: inline;#}
+	{#padding: 10px 15px;representation of payment method #}
+{# TODO: change selected payment method whaen changing shipping method #}
+
+	{% if show_additional_charge %}
+	<div class="additional-charge">
+		{% for choice, label in payment_method_form.payment_modifier.field.choices %}
+		<p ng-repeat="extra_row in cart.extra_rows|filter:{modifier:'{{ choice }}'}">{% trans "Additional charge" %}: {% verbatim %}{{ extra_row.amount }}{% endverbatim %}</p>
+		{% endfor %}
+		{% if payment_modifiers.initial_row %}
+		<p ng-if="!cart.extra_rows">{% trans "Additional charge" %}: {{ payment_modifiers.initial_row.amount }}</p>
+		{% endif %}
+	</div>
+	{% endif %}
+{% else %}
+	<input name="__force_invalidation__" style="display: none;" required />
+	<p class="bg-danger">{% trans "No payment method available" %}</p>
+{% endif %}
+</form>
+
+
+	{% block payment-provider-form %}
+
+		{% if payment_modifiers.stripe_payment %}
+		<div ng-show="payment_method.payment_modifier==='stripe-payment'" class="animate-show" ng-cloak>
+			{% include "shop/stripe-creditcard-form.html" %}
+		</div>
+		{% endif %}
+
+	{% endblock %}
+{% endblock dialog_form %}

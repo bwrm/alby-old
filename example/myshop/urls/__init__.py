@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^robots\.txt$', render_robots),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
     url(r'^shop/', include('shop.urls', namespace='shop')),
+    url(r'^planner/', include('planner.urls', namespace='planner')),
 ]
 # if settings.USE_I18N:
 #     urlpatterns.extend(i18n_patterns(*i18n_urls))

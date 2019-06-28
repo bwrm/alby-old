@@ -7,7 +7,7 @@ from shop.modifiers.base import ShippingModifier
 from shop.money import Money
 from shop.shipping.defaults import DefaultShippingProvider
 from shop.payment.defaults import ForwardFundPayment
-# from myshop.payment import CodPayment
+from myshop.payment import CodPayment
 
 from shop.modifiers.base import PaymentModifier
 
@@ -23,7 +23,9 @@ class PostalShippingModifier(ShippingModifier):
         if not self.is_active(cart) and len(cart_modifiers_pool.get_shipping_modifiers()) > 1:
             return
         # postal tarifs by Siarhei
-        if cart.total_weight<1:
+        if cart.total_weight == 0:
+            amount = 0
+        elif cart.total_weight<1:
             amount = Money('4')
         elif cart.total_weight >=1 and cart.total_weight < 3:
             amount = Money('7.5')

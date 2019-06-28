@@ -15,8 +15,9 @@ djangoShopModule.controller('AddToCartCtrl', ['$scope', '$http', '$window', '$ui
 		$http.get(updateUrl).then(function(response) {
 			prevContext = response.data;
 			$scope.context = angular.copy(response.data);
-		}).catch(function(ressponse) {
-			console.error('Unable to get context: ' + ressponse.statusText);
+			console.error('Unable to get context: ' + updateUrl);
+		}).catch(function(response) {
+			console.error('Unable to get context: ' + response.statusText);
 		});
 	};
 
@@ -47,6 +48,140 @@ djangoShopModule.controller('AddToCartCtrl', ['$scope', '$http', '$window', '$ui
 			$window.location.href = next_url;
 		});
 	};
+
+	//remove not fabric cart items
+	function removeNotFabric(){
+		for(var i=0; i<$scope.cartItems.length; i++)
+				if($scope.cartItems[i].summary.product_model != 'fabric')
+					$scope.cartItems.splice(i, 1);
+	}
+
+	//max count alowed for order
+	function exceedMaxCount(cart){
+		var maxCount = 5;
+		if(cart.length>= maxCount)
+			return true;
+		else
+			return false;
+
+	}
+
+	//method load cart if page on load enterpoint=true onClick-false
+	$scope.loadSamplesCart = function(cart_url, enterPoint=true){
+			$http.get(cart_url).then(function(response){
+				if(enterPoint){
+					$scope.cartItems = response.data.items;
+					removeNotFabric();
+				}
+				else {
+					$scope.cartItems = response.data.items;
+					removeNotFabric();
+				}
+
+			}).catch(function(response) {
+			console.error('Unable to update context: ' + response.statusText);
+			});
+
+	};
+
+	function getCartById(id){
+		var res = false;
+		for(var i=0; i<=$scope.cartItems.length; i++){
+			if($scope.cartItems[i].summary.id == id)
+				return $scope.cartItems[i];
+			else{
+				res = false;
+			}
+		}
+		return res;
+	}
+
+	$scope.addToCartFabric = function(cart_url, data) {
+		var checkData = $scope.checkedSamples(data);
+		if(exceedMaxCount($scope.cartItems) && !checkData){
+			return true;
+		}
+		if(checkData){
+			$scope.removeFromCart(getCartById(data));
+			return true
+		}
+		$http.post(cart_url, {"product":data,"quantity":1}).then(function () {
+			$scope.loadSamplesCart(cart_url,false);
+			$scope.IsInCart = $scope.checkedSamples(data);
+		});
+	};
+
+	//check if product id already in a cart
+	$scope.checkedSamples = function(id) {
+		if($scope.cartItems){
+			for(var i=0; i<$scope.cartItems.length; i++)
+				if($scope.cartItems[i].summary.id == id)
+					return true;
+		}
+	};
+
+	//TODO: in some cases cartItem == false ???
+	function uploadCartItemFromCatalog(method, cartItem) {
+		if(cartItem){
+			$http({
+				url: cartItem.url,
+				method: method,
+				data: cartItem
+			}).then(function(response) {
+				angular.extend($scope.cart_item, response.data.cart_item);
+				angular.extend($scope.cart, response.data.cart);
+			});
+		}
+	}
+
+	$scope.removeFromCart= function(cart){
+		var index = $scope.cartItems.indexOf(cart);
+		uploadCartItemFromCatalog('DELETE', cart);
+		if (index !== -1) {
+			$scope.cartItems.splice(index, 1);
+		}
+
+	};
+
+
+	var amountSamples = 6;
+	$scope.checkProducts = [];
+
+	//function check permited or not to add object to checked list, it's permit if checked products< amountSamples
+	// and prodct doesen't checked yet
+	function CheckIfPermit(prod){
+		if($scope.checkProducts.length>=amountSamples){
+			return false;
+		}
+		else if($scope.checkProducts.length>0) {
+			for(var i = 0;i < $scope.checkProducts.length;i++){
+				if($scope.checkProducts[i] == prod) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	//function add product to checked list
+	$scope.ImageClick = function (clObj) {
+		if(CheckIfPermit(clObj))
+			$scope.checkProducts = $scope.checkProducts.concat(clObj);
+		alert($scope.data);
+
+	};
+
+	// function remove product from checked list
+	$scope.ImageClear = function (cleanProd) {
+		var index = $scope.checkProducts.indexOf(cleanProd);
+		$scope.checkProducts.splice(index,1);
+	};
+
+
+
+
+
+
 }]);
 
 djangoShopModule.controller('ModalInstanceCtrl',
@@ -85,6 +220,7 @@ djangoShopModule.directive('shopAddToCart', function() {
 			if (!attrs.shopAddToCart)
 				throw new Error("Directive shop-add-to-cart must point onto an URL");
 			AddToCartCtrl.setUpdateUrl(attrs.shopAddToCart);
+			// alert(attrs.shopAddToCart);
 			AddToCartCtrl.loadContext();
 		}
 	};
@@ -102,6 +238,7 @@ djangoShopModule.controller('CatalogListController', ['$log', '$scope', '$http',
 		$http.get(fetchURL, config).then(function(response) {
 			fetchURL = response.data.next;
 			$scope.catalog.count = response.data.count;
+			// alert(response.data.count);
 			$scope.catalog.products = $scope.catalog.products.concat(response.data.results);
 			isLoading = false;
 		}).catch(function() {
@@ -220,6 +357,19 @@ djangoShopModule.directive('shopSyncCatalogItem', function() {
 		}
 	};
 });
+
+
+djangoShopModule.controller('shopSamples', function($scope) {
+	$scope.xxx = [
+  { name: 'John', age: 25 },
+  { name: 'Barry', age: 43 },
+  { name: 'Kim', age: 26 },
+  { name: 'Susan', age: 51 },
+  { name: 'Fritz', age: 19 }
+	];
+});
+
+
 
 
 })(window.angular);

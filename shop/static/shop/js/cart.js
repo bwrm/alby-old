@@ -88,7 +88,7 @@ djangoShopModule.directive('shopCartItem', function() {
 				}
 			};
 
-			// readd a cart item from the watch list to the cart
+			// read a cart item from the watch list to the cart
 			$scope.addCartItem = function(cartItem) {
 				var index = $scope.cart.items.indexOf(cartItem);
 				uploadCartItem('PUT', cartItem);

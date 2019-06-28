@@ -23,7 +23,7 @@ class ProductSummarySerializer(ProductSerializer):
     def get_media(self, product):
         return self.render_html(product, 'media')
 
-from .polymorphic import (LamellaFixToCartSerializer, SmartCardSerializer, SmartPhoneSerializer, AddSmartPhoneToCartSerializer)
+from .polymorphic import (LamellaFixToCartSerializer, SmartCardSerializer, SmartPhoneSerializer, AddSmartPhoneToCartSerializer, FabricSerializer)
 
 __all__.extend(['LamellaFixToCartSerializer', 'SmartCardSerializer', 'SmartPhoneSerializer', 'AddSmartPhoneToCartSerializer'])
 

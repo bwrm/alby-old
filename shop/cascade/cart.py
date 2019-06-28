@@ -80,3 +80,33 @@ class ShopCartPlugin(LeftRightExtensionMixin, TransparentWrapper, ShopPluginBase
         return self.super(ShopCartPlugin, self).render(context, instance, placeholder)
 
 plugin_pool.register_plugin(ShopCartPlugin)
+
+
+
+class FabricSamplesCartPlugin(LeftRightExtensionMixin, TransparentWrapper, ShopPluginBase):
+    name = _("CartFabricSamples")
+    require_parent = True
+    parent_classes = ('BootstrapColumnPlugin',)
+    cache = False
+    allow_children = True
+    model_mixins = (ShopExtendableMixin,)
+
+    def get_render_template(self, context, instance, placeholder):
+        render_template = instance.glossary.get('render_template')
+        template_names = ['{}/cart/fabric.html'.format(app_settings.APP_LABEL),]
+        return select_template(template_names)
+
+    def render(self, context, instance, placeholder):
+        try:
+            cart = CartModel.objects.get_from_request(context['request'])
+            context['is_cart_filled'] = cart.items.exists()
+            render_type = instance.glossary['render_type']
+            if render_type in ('static', 'summary',):
+                # update context for static and summary cart rendering since items are rendered in HTML
+                cart_serializer = CartSerializer(cart, context=context, label='cart')
+                context['cart'] = cart_serializer.data
+        except (KeyError, CartModel.DoesNotExist):
+            pass
+        return self.super(FabricSamplesCartPlugin, self).render(context, instance, placeholder)
+
+plugin_pool.register_plugin(FabricSamplesCartPlugin)

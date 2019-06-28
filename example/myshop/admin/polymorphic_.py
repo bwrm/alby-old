@@ -15,8 +15,19 @@ from polymorphic.admin import (PolymorphicParentModelAdmin, PolymorphicChildMode
 
 from shop.admin.product import CMSPageAsCategoryMixin, ProductImageInline, InvalidateProductCacheMixin, CMSPageFilter
 from myshop.models.discount import Discount
-from myshop.models import Product, Commodity, SmartCard, SmartPhoneVariant, SmartPhoneModel, LamellaFix
+from myshop.models import Product, Fabric, Commodity, SmartCard, SmartPhoneVariant, SmartPhoneModel, LamellaFix
 
+
+@admin.register(Fabric)
+class FabricAdmin(InvalidateProductCacheMixin, SortableAdminMixin, FrontendEditableAdminMixin,
+                     CMSPageAsCategoryMixin, PlaceholderAdminMixin, PolymorphicChildModelAdmin):
+    base_model = Product
+    fields = ['product_name', 'slug', 'unit_price', 'active', 'caption',
+              'description', 'composition', 'care', 'fabric_type', 'product_code']
+    filter_horizontal = ['cms_pages']
+    inlines = [ProductImageInline]
+    prepopulated_fields = {'slug': ['product_name']}
+    save_as = True
 
 @admin.register(Commodity)
 class CommodityAdmin(InvalidateProductCacheMixin, SortableAdminMixin, FrontendEditableAdminMixin, PlaceholderAdminMixin,
@@ -87,7 +98,7 @@ class SmartPhoneAdmin(InvalidateProductCacheMixin, SortableAdminMixin, FrontendE
 @admin.register(Product)
 class ProductAdmin(PolymorphicSortableAdminMixin, PolymorphicParentModelAdmin):
     base_model = Product
-    child_models = [SmartPhoneModel, SmartCard, Commodity, LamellaFix]
+    child_models = [SmartPhoneModel, SmartCard, Commodity, LamellaFix, Fabric]
     list_display = ['product_name', 'get_price', 'product_type', 'active']
     list_display_links = ['product_name']
     search_fields = ['product_name']
@@ -98,5 +109,6 @@ class ProductAdmin(PolymorphicSortableAdminMixin, PolymorphicParentModelAdmin):
     def get_price(self, obj):
         return str(obj.get_real_instance().get_price(None))
     get_price.short_description = _("Price starting at")
+
 
 admin.site.register(Discount)

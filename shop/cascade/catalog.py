@@ -58,6 +58,42 @@ class ShopCatalogPlugin(ShopPluginBase):
 
 plugin_pool.register_plugin(ShopCatalogPlugin)
 
+class FabricCatalogPlugin(ShopPluginBase):
+    name = _("Fabric List View")
+    require_parent = True
+    parent_classes = ('BootstrapColumnPlugin', 'SimpleWrapperPlugin',)
+    cache = False
+
+    infinite_scroll = GlossaryField(
+        widgets.CheckboxInput(),
+        label=_("Infinite Scroll"),
+        initial=True,
+        help_text=_("Shall the product list view scroll infinitely?"),
+    )
+
+    def get_render_template(self, context, instance, placeholder):
+        templates = []
+        if instance.glossary.get('render_template'):
+            templates.append(instance.glossary['render_template'])
+        templates.extend([
+            '{}/catalog/fabric-list.html'.format(app_settings.APP_LABEL),
+            'myshop/catalog/fabric-list.html',
+        ])
+        return select_template(templates)
+
+    def render(self, context, instance, placeholder):
+        context['infinite_scroll'] = bool(instance.glossary.get('infinite_scroll', True))
+        return context
+
+    @classmethod
+    def get_identifier(cls, obj):
+        if obj.glossary.get('infinite_scroll', True):
+            return ugettext("Infinite Scroll")
+        return ugettext("Manual Pagination")
+
+
+plugin_pool.register_plugin(FabricCatalogPlugin)
+
 
 class ShopAddToCartPlugin(ShopPluginBase):
     name = _("Add Product to Cart")

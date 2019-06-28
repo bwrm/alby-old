@@ -30,4 +30,5 @@ urlpatterns = [
     url(r'^(?P<slug>[\w-]+)/add-lamellafix-to-cart', AddToCartView.as_view(
         serializer_class=LamellaFixToCartSerializer,
     )),
+    url(r'^(?P<slug>[\w-]+)/add-fabric-to-cart', AddToCartView.as_view()),
 ]

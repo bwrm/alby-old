@@ -6,8 +6,33 @@ from rest_framework.fields import empty
 from shop.serializers.bases import ProductSerializer
 from shop.serializers.defaults import AddToCartSerializer
 
-from myshop.models import SmartCard, SmartPhoneModel, LamellaFix
+from myshop.models import SmartCard, SmartPhoneModel, LamellaFix, Fabric
+from django.utils import six
+from django.utils.html import strip_spaces_between_tags
+from django.template.loader import select_template
+from django.utils.safestring import mark_safe, SafeText
+from django.core.cache import cache
 
+
+class FabricSerializer(ProductSerializer):
+    class Meta:
+        model = Fabric
+        fields = ['id', 'product_name', 'slug', 'unit_price', 'fabric_type', 'composition', 'care',
+                  'product_code']
+
+
+# class FabricToCartSerializer(AddToCartSerializer):
+#
+#     def get_instance(self, context, data, extra_args):
+#         """
+#         Method calculate product's subtotal price depending on order number
+#         """
+#         product = context['product']
+#         return {
+#             'product': product.id,
+#             'product_code': product.product_code,
+#         }
+#
 
 class SmartCardSerializer(ProductSerializer):
     class Meta:
@@ -28,7 +53,6 @@ class LamellaFixToCartSerializer(AddToCartSerializer):
         """
         Method calculate product's subtotal price depending on order number
         """
-
         product = context['product']
         extra = data.get('extra', {}) if data is not empty else {}
         unit_price = product.get_price(context['request'])
